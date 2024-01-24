@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Harry Potter World</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="top-bar" class="row h-25">
+        <div
+          class="col-4 col-md-6 col-lg-3 col-xl-2 h-100 d-flex justify-content-left"
+        >
+          <img
+            id="hogwarts-logo"
+            src="https://www.youloveit.ru/uploads/gallery/comthumb/553/hogwarts_banner_by_asymingt.jpg"
+            alt="Hogwarts-logo"
+          />
+        </div>
+        <div
+          class="col-8 col-md-6 col-lg-9 col-xl-10 d-flex justify-content-center align-items-center"
+        >
+          <h1>Hogwarts!</h1>
+        </div>
+      </div>
+      <div
+        id="search-bar"
+        class="row d-flex justify-content-evenly align-items-center"
+      >
+        <input
+          type="search"
+          name="search-characters"
+          id="inputSearchCharacters"
+          placeholder="Search characters"
+        />
+        <button
+          type="button"
+          id="add-btn"
+          data-toggle="modal"
+          data-target="#add-new-character-modal"
+        >
+          Add new character
+        </button>
+        <div
+          id="add-new-character-modal"
+          class="modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="addNewCharacterLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="addNewCharacterLabel">
+                  Add new character
+                </h2>
+                <button
+                  type="button"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  class="close-modal"
+                  id="close-modal-btn1"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label for="id-input">Id</label>
+                <input id="id-input" type="number" />
+                <label for="first-name-input">First name</label>
+                <input id="first-name-input" type="text" />
+
+                <label for="last-name-input">Last name</label>
+                <input id="last-name-input" type="text" />
+                <label for="gender-input">Gender</label>
+                <input id="gender-input" type="text" />
+                <label for="date-of-birth-input">Date of Birth</label>
+                <input id="date-of-birth-input" type="date" />
+                <label for="blood-status-input">Blood status</label>
+                <input id="blood-status-input" type="text" />
+                <label for="house-input">House</label>
+                <input id="house-input" type="text" />
+                <label for="profession-input">Profession</label>
+                <input id="profession-input" type="text" />
+                <label for="affiliations-input">Affiliations</label>
+                <input id="affiliations-input" type="text" />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary close-modal-btn"
+                  id="close-modal-btn2"
+                  data-dismiss="modal"
+                  class="close-modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="save-character-btn"
+                >
+                  Save character
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="character-container"
+        class="row h-100 d-flex justify-content-between"
+      ></div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

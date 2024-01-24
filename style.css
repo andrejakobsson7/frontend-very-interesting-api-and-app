@@ -1,0 +1,66 @@
+html,
+body {
+  height: 100%;
+  background-color: black;
+}
+#wrapper {
+  height: 100%;
+}
+
+#search-bar {
+  height: 10%;
+  border: 1px solid gray;
+}
+#hogwarts-logo {
+  width: 80%;
+  max-width: 80%;
+}
+h1 {
+  color: yellow;
+}
+#inputSearchCharacters {
+  width: 40%;
+  height: 50%;
+}
+#add-btn {
+  width: 20%;
+  height: 50%;
+  background-color: yellow;
+  color: black;
+}
+
+.character-card {
+  margin: 1%;
+  background-image: url("https://4.bp.blogspot.com/-rgPDmTW-6QE/UKXQ456T1_I/AAAAAAAAF08/PYdz5Vz17cI/s640/vintage+paper.jpg");
+  border: 1px solid gray;
+  border-radius: 5%;
+}
+.character-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close-modal {
+  background-color: transparent;
+  color: #801818;
+  border: transparent;
+}
+button {
+  border: 1px solid black;
+  color: blanchedalmond;
+  border-radius: 5%;
+  margin-bottom: 1%;
+}
+.delete-btn {
+  background-color: #801818;
+}
+.update-btn {
+  background-color: rgb(0, 132, 255);
+}
+.save-btn {
+  /* visibility: hidden; */
+  background-color: green;
+}
+label {
+  display: block;
+}
