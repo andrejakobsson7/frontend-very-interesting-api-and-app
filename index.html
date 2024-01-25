@@ -48,77 +48,80 @@
         >
           Add new character
         </button>
-        <div
-          id="add-new-character-modal"
-          class="modal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="addNewCharacterLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h2 class="modal-title" id="addNewCharacterLabel">
-                  Add new character
-                </h2>
-                <button
-                  type="button"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  class="close-modal"
-                  id="close-modal-btn1"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <label for="id-input">Id</label>
-                <input id="id-input" type="number" />
-                <label for="first-name-input">First name</label>
-                <input id="first-name-input" type="text" />
-
-                <label for="last-name-input">Last name</label>
-                <input id="last-name-input" type="text" />
-                <label for="gender-input">Gender</label>
-                <input id="gender-input" type="text" />
-                <label for="date-of-birth-input">Date of Birth</label>
-                <input id="date-of-birth-input" type="date" />
-                <label for="blood-status-input">Blood status</label>
-                <input id="blood-status-input" type="text" />
-                <label for="house-input">House</label>
-                <input id="house-input" type="text" />
-                <label for="profession-input">Profession</label>
-                <input id="profession-input" type="text" />
-                <label for="affiliations-input">Affiliations</label>
-                <input id="affiliations-input" type="text" />
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary close-modal-btn"
-                  id="close-modal-btn2"
-                  data-dismiss="modal"
-                  class="close-modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="save-character-btn"
-                >
-                  Save character
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div
         id="character-container"
         class="row h-100 d-flex justify-content-between"
       ></div>
+
+      <!-- Modals -->
+      <!-- Add new character-modal -->
+      <div
+        id="add-new-character-modal"
+        class="modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addNewCharacterLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="addNewCharacterLabel">
+                Add new character
+              </h2>
+              <button
+                type="button"
+                data-dismiss="modal"
+                aria-label="Close"
+                class="close-modal"
+                id="close-modal-btn1"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <label for="id-input">Id</label>
+              <input id="id-input" type="number" />
+              <label for="first-name-input">First name</label>
+              <input id="first-name-input" type="text" />
+
+              <label for="last-name-input">Last name</label>
+              <input id="last-name-input" type="text" />
+              <label for="gender-input">Gender</label>
+              <input id="gender-input" type="text" />
+              <label for="date-of-birth-input">Date of Birth</label>
+              <input id="date-of-birth-input" type="date" />
+              <label for="blood-status-input">Blood status</label>
+              <input id="blood-status-input" type="text" />
+              <label for="house-input">House</label>
+              <input id="house-input" type="text" />
+              <label for="profession-input">Profession</label>
+              <input id="profession-input" type="text" />
+              <label for="affiliations-input">Affiliations</label>
+              <input id="affiliations-input" type="text" />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary close-modal-btn"
+                id="close-modal-btn2"
+                data-dismiss="modal"
+                class="close-modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="save-character-btn"
+              >
+                Save character
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
