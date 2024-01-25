@@ -3,6 +3,8 @@ let characterContainer = document.querySelector("#character-container");
 let addBtn = document.querySelector("#add-btn");
 let addNewCharacterModal = document.getElementById("add-new-character-modal");
 let saveCharacterBtn = document.querySelector("#save-character-btn");
+
+//From modal
 let idInput = document.querySelector("#id-input");
 let imageUrlInput = document.querySelector("#image-url-input");
 let firstNameInput = document.querySelector("#first-name-input");
@@ -12,9 +14,11 @@ let dateOfBirthInput = document.querySelector("#date-of-birth-input");
 let bloodStatusInput = document.querySelector("#blood-status-input");
 let houseInput = document.querySelector("#house-input");
 let professionInput = document.querySelector("#profession-input");
-let affiliationsInput = document.querySelector("#affiliations-input");
 let closeModalBtn1 = document.querySelector("#close-modal-btn1");
 let closeModalBtn2 = document.querySelector("#close-modal-btn2");
+let addAffiliationBtn = document.querySelector("#add-affiliation-btn");
+let affiliationsContainer = document.querySelector("#affiliations-container");
+let addAffiliationsBtnClick = 0;
 
 //Get data
 fetch("https://localhost:7251/v1/Users").then((response) =>
@@ -26,8 +30,17 @@ addBtn.addEventListener("click", openAddNewCharacterModal);
 saveCharacterBtn.addEventListener("click", addNewCharacter);
 closeModalBtn1.addEventListener("click", closeAddNewCharacterModal);
 closeModalBtn2.addEventListener("click", closeAddNewCharacterModal);
+addAffiliationBtn.addEventListener("click", addNewAffiliationInput);
 
 //Functions
+
+//Add new input field for affiliation
+function addNewAffiliationInput() {
+  addAffiliationsBtnClick++;
+  affiliationsContainer.innerHTML += `
+  <input id="affiliations-input-${addAffiliationsBtnClick}" type="text" />
+  `;
+}
 //Open modal for adding new character
 function openAddNewCharacterModal() {
   addNewCharacterModal.style.display = "block";
@@ -36,6 +49,23 @@ function openAddNewCharacterModal() {
 //Close modal for adding new character
 function closeAddNewCharacterModal() {
   addNewCharacterModal.style.display = "none";
+  restoreModal();
+}
+
+//Clear all entered values in modal
+function restoreModal() {
+  idInput.value = "";
+  genderInput.value = "";
+  imageUrlInput.value = "";
+  firstNameInput.value = "";
+  lastNameInput.value = "";
+  dateOfBirthInput.value = "";
+  bloodStatusInput.value = "";
+  houseInput.value = "";
+  professionInput.value = "";
+  affiliationsContainer.innerHTML = `
+    <label for="affiliations-input-0">Affiliations</label>
+    <input id="affiliations-input-0" type="text" />`;
 }
 
 //Add new character to 'database'
@@ -60,6 +90,19 @@ function addNewCharacter() {
 
 //Create an object-character
 function createCharacter() {
+  //Create an array of affiliations from the user input-fields from the container.
+  let affiliationsInputs = Array.from(
+    document
+      .getElementById("affiliations-container")
+      .getElementsByTagName("input")
+  );
+  let characterAffiliations = [];
+  //If the text field is empty, ignore
+  affiliationsInputs.forEach((a) => {
+    if (a.value != "") {
+      characterAffiliations.push(a.value);
+    }
+  });
   let newCharacter = {
     id: Number(idInput.value),
     img: imageUrlInput.value,
@@ -71,7 +114,7 @@ function createCharacter() {
     bloodStatus: bloodStatusInput.value,
     house: houseInput.value,
     profession: professionInput.value,
-    affiliations: [affiliationsInput.value],
+    affiliations: characterAffiliations,
   };
   return newCharacter;
 }
@@ -179,7 +222,9 @@ async function updateCharacter(characterId) {
   );
   let characterAffiliations = [];
   affiliationsInputs.forEach((a) => {
-    characterAffiliations.push(a.value);
+    if (a.value != "") {
+      characterAffiliations.push(a.value);
+    }
   });
 
   //Get the character from 'db' so we can use it's information

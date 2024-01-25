@@ -27,10 +27,18 @@ h1 {
   height: 50%;
   background-color: yellow;
   color: black;
+  margin: 0;
+}
+
+#add-affiliation-btn {
+  background-color: transparent;
+  border-color: transparent;
+  color: blue;
+  padding: 0;
 }
 
 .character-card {
-  margin: 1%;
+  margin: 2%;
   background-image: url("https://4.bp.blogspot.com/-rgPDmTW-6QE/UKXQ456T1_I/AAAAAAAAF08/PYdz5Vz17cI/s640/vintage+paper.jpg");
   border: 1px solid gray;
   border-radius: 5%;
@@ -64,6 +72,9 @@ button {
   background-color: green;
 }
 label {
+  display: block;
+}
+input {
   display: block;
 }
 
