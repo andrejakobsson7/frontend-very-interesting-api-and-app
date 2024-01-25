@@ -4,6 +4,7 @@ let addBtn = document.querySelector("#add-btn");
 let addNewCharacterModal = document.getElementById("add-new-character-modal");
 let saveCharacterBtn = document.querySelector("#save-character-btn");
 let idInput = document.querySelector("#id-input");
+let imageUrlInput = document.querySelector("#image-url-input");
 let firstNameInput = document.querySelector("#first-name-input");
 let lastNameInput = document.querySelector("#last-name-input");
 let genderInput = document.querySelector("#gender-input");
@@ -61,6 +62,7 @@ function addNewCharacter() {
 function createCharacter() {
   let newCharacter = {
     id: Number(idInput.value),
+    img: imageUrlInput.value,
     firstName: firstNameInput.value,
     lastName: lastNameInput.value,
     fullName: firstNameInput.value + lastNameInput.value,
@@ -78,13 +80,16 @@ function createCharacter() {
 //Add buttons to handle delete, update and saving changes.
 //TODO: Handle multiple affiliations and present them in a nice way
 function displayData(characters) {
-  //Start with clearing the page to handle toggling
+  //Start with clearing the page to handle when page is reloaded after updates, adding and deleting of characters.
   characterContainer.innerHTML = "";
   characters.forEach((c) => {
     let trimmedDateOfBirth = c.birthDate.substring(0, 10);
     characterContainer.innerHTML += `
         <div class="col-12 col-md-5 col-lg-4 col-xl-3 character-card">
         <h2 class="d-flex justify-content-center">${c.fullName}</h2>
+        <div class="image-container">
+           <img class="character-image" src="${c.img}" alt="${c.fullName}-picture">
+        </div>
             <hr class="upper-line">
             <p class="d-flex justify-content-between">Gender: <input id="gender-input-${c.id}" class="input-character-card" readonly="true" value="${c.gender}"></input></p>
             <hr>
@@ -137,6 +142,7 @@ function unlockInputFields(characterId) {
 
 //Update character by id
 async function updateCharacter(characterId) {
+  //Selectors
   let genderInput = document.querySelector(`#gender-input-${characterId}`);
   let dateOfBirthInput = document.querySelector(
     `#date-of-birth-input-${characterId}`
@@ -151,9 +157,12 @@ async function updateCharacter(characterId) {
   let affiliationsInput = document.querySelector(
     `#affiliations-input-${characterId}`
   );
+  //Get the character from 'db' so we can use it's information
   let response = await fetch(`https://localhost:7251/v1/Users/${characterId}`);
   let characterToUpdate = await response.json();
-  console.log(characterToUpdate);
+
+  //Create a new character and assign it's attributes.
+  //The ones that are not changeable are assigned from the fetched user and the other are set from the input fields.
   let updatedCharacter = {
     id: characterToUpdate.id,
     firstName: characterToUpdate.firstName,
@@ -167,7 +176,7 @@ async function updateCharacter(characterId) {
     profession: professionInput.value,
     affiliations: [affiliationsInput.value],
   };
-  console.log(updatedCharacter);
+  //Update user in 'db'
   fetch(`https://localhost:7251/v1/Users/${characterId}`, {
     method: "PUT",
     headers: {
@@ -177,15 +186,12 @@ async function updateCharacter(characterId) {
   }).then((response) => {
     if (response.ok) {
       window.alert("Character was successfully updated!");
+      //Reload characters
       getCharacters();
     } else {
       window.alert(`Something went wrong! Error code ${response.status}`);
     }
   });
-  //Fetch the user from 'db'
-  //Read all input-fields
-  //Set the user's info to what's in the container
-  //Update page.
 }
 
 //Delete character by id

@@ -73,3 +73,13 @@ label {
 .input-character-card {
   text-align: right;
 }
+.character-image {
+  border: 1px solid black;
+  height: 300px;
+  width: auto;
+  border-radius: 5%;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+}
