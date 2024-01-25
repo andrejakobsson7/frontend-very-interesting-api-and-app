@@ -101,7 +101,8 @@ function displayData(characters) {
             <hr>
             <p class="d-flex justify-content-between">Profession: <input id="profession-input-${c.id}" class="input-character-card" readonly="true" value="${c.profession}"></input></p>
             <hr>
-            <p class="d-flex justify-content-between">Affiliations: <input id="affiliations-input-${c.id}" class="input-character-card" readonly="true" value="${c.affiliations[0]}"></p>
+            <div id="affiliations-container-${c.id}">
+            </div>
             <hr>
             <div class="button-container d-flex justify-content-between">
                 <button class="delete-btn" id="delete-btn-${c.id}" onclick="deleteCharacter(${c.id})">Delete character</button>
@@ -111,6 +112,22 @@ function displayData(characters) {
 
         </div>
         `;
+    let affiliationsContainer = document.querySelector(
+      `#affiliations-container-${c.id}`
+    );
+    let count = 0;
+    c.affiliations.forEach((a) => {
+      if (count < 1) {
+        affiliationsContainer.innerHTML += `
+        <p class="d-flex justify-content-between">Affiliations:<input id="affiliations-input-${c.id}-${count}" class="input-character-card" readonly="true" value="${a}"></p>
+        `;
+      } else {
+        affiliationsContainer.innerHTML += `
+          <p class="d-flex justify-content-between">'<input id="affiliations-input-${c.id}-${count}" class="input-character-card" readonly="true" value="${a}"></input></p>
+          `;
+      }
+      count++;
+    });
   });
 }
 
@@ -154,9 +171,17 @@ async function updateCharacter(characterId) {
   let professionInput = document.querySelector(
     `#profession-input-${characterId}`
   );
-  let affiliationsInput = document.querySelector(
-    `#affiliations-input-${characterId}`
+
+  let affiliationsInputs = Array.from(
+    document
+      .getElementById(`affiliations-container-${characterId}`)
+      .getElementsByTagName("input")
   );
+  let characterAffiliations = [];
+  affiliationsInputs.forEach((a) => {
+    characterAffiliations.push(a.value);
+  });
+
   //Get the character from 'db' so we can use it's information
   let response = await fetch(`https://localhost:7251/v1/Users/${characterId}`);
   let characterToUpdate = await response.json();
@@ -174,7 +199,7 @@ async function updateCharacter(characterId) {
     bloodStatus: bloodStatusInput.value,
     house: houseInput.value,
     profession: professionInput.value,
-    affiliations: [affiliationsInput.value],
+    affiliations: characterAffiliations,
   };
   //Update user in 'db'
   fetch(`https://localhost:7251/v1/Users/${characterId}`, {
