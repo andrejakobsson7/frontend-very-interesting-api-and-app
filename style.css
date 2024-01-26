@@ -30,7 +30,7 @@ h1 {
   margin: 0;
 }
 
-#add-affiliation-btn {
+.add-affiliation-btn-style {
   background-color: transparent;
   border-color: transparent;
   color: blue;
@@ -85,7 +85,7 @@ input {
 }
 .input-character-card {
   text-align: right;
-  width: 50%;
+  width: 60%;
 }
 .character-image {
   border: 1px solid black;

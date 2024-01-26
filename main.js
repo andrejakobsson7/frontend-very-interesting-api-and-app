@@ -3,6 +3,7 @@ let characterContainer = document.querySelector("#character-container");
 let addBtn = document.querySelector("#add-btn");
 let addNewCharacterModal = document.getElementById("add-new-character-modal");
 let saveCharacterBtn = document.querySelector("#save-character-btn");
+let addAffiliationsBtnClickOnUpdate = 0;
 
 //From modal
 let idInput = document.querySelector("#id-input");
@@ -54,7 +55,7 @@ async function searchCharacters() {
 function addNewAffiliationInput() {
   addAffiliationsBtnClick++;
   affiliationsContainer.innerHTML += `
-  <input id="affiliations-input-${addAffiliationsBtnClick}" type="text" />
+  <p<input id="affiliations-input-${addAffiliationsBtnClick}" type="text" />
   `;
 }
 //Open modal for adding new character
@@ -162,6 +163,7 @@ function displayData(characters) {
             <hr>
             <div id="affiliations-container-${c.id}">
             </div>
+            <p class="d-flex justify-content-between" style="visibility: collapse">'<button id="add-affiliation-btn-${c.id}" class="add-affiliation-btn-style" onclick="addNewAffiliationsInput(${c.id})">+ Add affiliation</button></p>
             <hr>
             <div class="button-container d-flex justify-content-between">
                 <button class="delete-btn" id="delete-btn-${c.id}" onclick="deleteCharacter(${c.id})">Delete character</button>
@@ -197,6 +199,16 @@ function getCharacters() {
   );
 }
 
+function addNewAffiliationsInput(characterId) {
+  addAffiliationsBtnClickOnUpdate++;
+  let currentUserAffiliationsContainer = document.getElementById(
+    `affiliations-container-${characterId}`
+  );
+  currentUserAffiliationsContainer.innerHTML += `
+  <p class="d-flex justify-content-between">'<input id="affiliations-input-${addAffiliationsBtnClickOnUpdate}-update" class="input-character-card" type="text" /></p>
+  `;
+}
+
 function unlockInputFields(characterId) {
   //Get all input fields in the whole container and make them editable.
   let inputFields = Array.from(
@@ -214,6 +226,12 @@ function unlockInputFields(characterId) {
   //Show button 'Save changes'
   let saveChangesButton = document.getElementById(`save-btn-${characterId}`);
   saveChangesButton.style.visibility = "visible";
+
+  //Shot button 'Add affiliations'
+  let addAffiliationsBtnOnUpdate = document.getElementById(
+    `add-affiliation-btn-${characterId}`
+  );
+  addAffiliationsBtnOnUpdate.style.visibility = "visible";
 }
 
 //Update character by id
