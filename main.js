@@ -5,7 +5,7 @@ let addNewCharacterModal = document.getElementById("add-new-character-modal");
 let saveCharacterBtn = document.querySelector("#save-character-btn");
 let addAffiliationsBtnClickOnUpdate = 0;
 
-//From modal
+//Selectors from modal
 let idInput = document.querySelector("#id-input");
 let imageUrlInput = document.querySelector("#image-url-input");
 let firstNameInput = document.querySelector("#first-name-input");
@@ -23,9 +23,7 @@ let addAffiliationsBtnClick = 0;
 let searchBox = document.querySelector("#search-characters-input");
 
 //Get data
-fetch("https://localhost:7251/v1/Users").then((response) =>
-  response.json().then((data) => displayData(data))
-);
+getCharacters();
 
 //Event listeners
 addBtn.addEventListener("click", openAddNewCharacterModal);
@@ -51,13 +49,14 @@ async function searchCharacters() {
   displayData(charactersToDisplay);
 }
 
-//Add new input field for affiliation
+//Add new input field for affiliation when in the modal
 function addNewAffiliationInput() {
   addAffiliationsBtnClick++;
   affiliationsContainer.innerHTML += `
   <p<input id="affiliations-input-${addAffiliationsBtnClick}" type="text" />
   `;
 }
+
 //Open modal for adding new character
 function openAddNewCharacterModal() {
   addNewCharacterModal.style.display = "block";
@@ -199,6 +198,7 @@ function getCharacters() {
   );
 }
 
+//Function for adding new affiliations input fields on editing character card.
 function addNewAffiliationsInput(characterId) {
   addAffiliationsBtnClickOnUpdate++;
   let currentUserAffiliationsContainer = document.getElementById(
@@ -209,6 +209,7 @@ function addNewAffiliationsInput(characterId) {
   `;
 }
 
+//Unlock all input fields upon editing character.
 function unlockInputFields(characterId) {
   //Get all input fields in the whole container and make them editable.
   let inputFields = Array.from(
