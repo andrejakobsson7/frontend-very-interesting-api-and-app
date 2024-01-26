@@ -19,6 +19,7 @@ let closeModalBtn2 = document.querySelector("#close-modal-btn2");
 let addAffiliationBtn = document.querySelector("#add-affiliation-btn");
 let affiliationsContainer = document.querySelector("#affiliations-container");
 let addAffiliationsBtnClick = 0;
+let searchBox = document.querySelector("#search-characters-input");
 
 //Get data
 fetch("https://localhost:7251/v1/Users").then((response) =>
@@ -31,8 +32,23 @@ saveCharacterBtn.addEventListener("click", addNewCharacter);
 closeModalBtn1.addEventListener("click", closeAddNewCharacterModal);
 closeModalBtn2.addEventListener("click", closeAddNewCharacterModal);
 addAffiliationBtn.addEventListener("click", addNewAffiliationInput);
+searchBox.addEventListener("input", searchCharacters);
 
 //Functions
+
+//Search users
+async function searchCharacters() {
+  let searchValue = searchBox.value;
+  let response = await fetch("https://localhost:7251/v1/Users");
+  let allCharacters = await response.json();
+  let charactersToDisplay = [];
+  allCharacters.forEach((c) => {
+    if (c.fullName.toUpperCase().includes(searchValue.toUpperCase())) {
+      charactersToDisplay.push(c);
+    }
+  });
+  displayData(charactersToDisplay);
+}
 
 //Add new input field for affiliation
 function addNewAffiliationInput() {
@@ -128,7 +144,7 @@ function displayData(characters) {
   characters.forEach((c) => {
     let trimmedDateOfBirth = c.birthDate.substring(0, 10);
     characterContainer.innerHTML += `
-        <div class="col-12 col-md-5 col-lg-4 col-xl-3 character-card">
+        <div class="col-10 col-md-5 col-lg-4 col-xl-3 character-card">
         <h2 class="d-flex justify-content-center">${c.fullName}</h2>
         <div class="image-container">
            <img class="character-image" src="${c.img}" alt="${c.fullName}-picture">
