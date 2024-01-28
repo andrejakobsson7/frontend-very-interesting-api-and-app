@@ -53,7 +53,7 @@ async function searchCharacters() {
 function addNewAffiliationInput() {
   addAffiliationsBtnClick++;
   affiliationsContainer.innerHTML += `
-  <p<input id="affiliations-input-${addAffiliationsBtnClick}" type="text" />
+  <p><input id="affiliations-input-${addAffiliationsBtnClick}" type="text" /></p>
   `;
 }
 
